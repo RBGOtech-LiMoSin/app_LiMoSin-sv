@@ -1,0 +1,68 @@
+
+:document-title: LiMoSin Server
+
+= LiMoSin
+
+== Linear Motion Sinus
+
+It is an electronic device to drive a stepper motor for linear motion within a
+range of positions, while reading the true distance traveled from a linear
+motion/position sensor, with 0.01 mm accuracy.
+
+From the deviations a graph is produced in which any fluctuations/deviations
+in the motion is visualized.
+
+Digital circuits and stepper motors are very precise, up to where the analog
+zone is entered, where there are spindles, meshing gears, pulleys and timing
+belts to be driven.
+
+LiMoSin is a tool for testing accuracy of a linear motion system in that zone.
+
+
+It is a ESP32-S3 micro controller driven device, with Wifi enabled, and having a
+little OLED display, showing its MAC and IP.
+At that IP it runs an HTTP and Websocket server to provide the web browser
+with a user interface to all its settings, database and management tasks.
+
+This repository contains the all the software that compiles into the firmware
+for this device. It is coded in VSCode editor with Platformio.
+
+.from platformio.ini
+----
+[platformio]
+default_envs = lolin_s3
+
+[env:lolin_s3]
+platform = espressif32
+board = lolin_s3
+framework = arduino
+----
+
+== Applications
+
+=== Gears
+Two gear wheels or a gear and a rack, can be tested on gear ratio consistency
+in any phase of their meshing. Could be a tooth curve fault or a wheel slightly
+eccentric on axis, what the graph may show.
+
+=== Belts
+A belt driven system could have an eccentric pulley, or having the belt tension
+too high or too low, is what the graph will show.
+
+This is what LiMoSin is designed to do; making for an excellent 3D printer
+and laser engraver, positioning calibration tool. It puts an end to: Scaling a
+design, or messing with steps per mm settings inside the firmware, to get it right!
+
+For a printer farm that parallel prints a technical precise multi part assembly,
+the parts are made on various printers, but should fit together just like that
+on the assembly table. This can only work, if those printers are calibrated
+exactly the same.
+
+Belt tension should be such that the its teeth array is stretched/scaled *one on one*
+with that belt its tooth pitch specifications.
+LiMoSin has also an input for a load cell inside a belt tensioner to measure
+the belt tension regularly over its lifetime; it is where the wear and possible
+creep can be detected, indicating that the belt should be replaced.
+This data can point out what belts are most wear resistant and/or retain their
+tension for the longest time.
+
